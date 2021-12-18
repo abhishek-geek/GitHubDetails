@@ -3,7 +3,7 @@ const { PORT } = require("./configs");
 
 require("./configs/connectMongo");
 
-app.get("/health", (_req, res) => {
+app.get("/", (_req, res) => {
   res.status(200).send(`Health Good`);
 })
 

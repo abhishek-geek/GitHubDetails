@@ -14,9 +14,13 @@ app.use(cors());
  * Import Routes
  */
 
+const gitHubStatRoutes = require("./routes/gitHubStat");
+
 /**
  * Use Routes
  */
+
+app.use("/api/github", gitHubStatRoutes);
 
 /**
  * Internal Server error handler
