@@ -10,7 +10,7 @@ const fetchDetails = async (req, res) => {
       const details = await GitHub.getDetails(userId);
       console.log(details);
       const stat = new GitHubStat({...details});
-      // const doc = await stat.save();
+      const doc = await stat.save();
       return res.status(200).json({ details, error: false });
     } else {
       return res.status(200).json({ doc: exists, error: false });
