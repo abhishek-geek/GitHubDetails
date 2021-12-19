@@ -15,6 +15,7 @@ const getDetails = async (userId) => {
     config
   );
   doc = {
+    name: userDetails.name,
     userId: userDetails.login,
     avatarUrl: userDetails.avatar_url,
   };

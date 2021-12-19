@@ -5,13 +5,15 @@ const fetchDetails = async (req, res) => {
   try {
     const { userId, fetchNew } = req.query;
     const exists = await GitHubStat.findOne({ userId });
-    if (fetchNew || !exists) {
-      console.log(1)
+    const myBool = fetchNew === "true";
+    console.log({ userId, fetchNew, myBool });
+    console.log(exists);
+    if (myBool || !exists) {
+      console.log(1);
       const details = await GitHub.getDetails(userId);
       console.log(details);
-      const stat = new GitHubStat({...details});
-      const doc = await stat.save();
-      return res.status(200).json({ details, error: false });
+      GitHubStat.updateOne({ userId }, { ...details }, { upsert: true }).exec();
+      return res.status(200).json({ doc: details, error: false });
     } else {
       return res.status(200).json({ doc: exists, error: false });
     }
