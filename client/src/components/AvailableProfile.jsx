@@ -8,11 +8,11 @@ import Profile from "./Profile";
 const AvailableProfiles = ({ setUserDetails, profiles }) => {
   console.log(profiles);
   return (
-    <>
+    <Row className="d-flex justify-content-center">
       {profiles.length && profiles.map((profile) => (
         <Profile setUserDetails={setUserDetails} key={profile._id} userDetails = {profile}/>
       ))}
-    </>
+    </Row>
   );
 };
 

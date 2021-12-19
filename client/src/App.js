@@ -32,12 +32,11 @@ function App() {
     <Container>
       <Search setUserDetails={setUserDetails} />
       <Routes>
-
         <Route
           path="/:userId/repos"
           element={<Repos repos={userDetails?.repos} />}
         />
-        
+
         <Route
           path="/:userId"
           element={<Profile userDetails={userDetails} />}
@@ -46,11 +45,13 @@ function App() {
         <Route
           path="/"
           element={
-            availableProfiles.length && (
+            availableProfiles.length ? (
               <AvailableProfiles
                 setUserDetails={setUserDetails}
                 profiles={availableProfiles}
               />
+            ) : (
+              "Loading..."
             )
           }
         />

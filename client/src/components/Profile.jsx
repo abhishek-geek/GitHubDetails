@@ -10,9 +10,7 @@ const Profile = ({ setUserDetails, userDetails }) => {
   // const navigate = useNavigate();
 
   return (
-    <>
-      {/* {showModal && userDetails?.repos.map(repo => <RepoModal repo={repo} />)} */}
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem" }} className="m-4">
         <Card.Img variant="top" src={userDetails?.avatarUrl || logo} />
         <Card.Body>
           <Card.Title>{userDetails?.name}</Card.Title>
@@ -22,7 +20,6 @@ const Profile = ({ setUserDetails, userDetails }) => {
           </Link>
         </Card.Body>
       </Card>
-    </>
   );
 };
 

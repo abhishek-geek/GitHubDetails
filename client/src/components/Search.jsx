@@ -6,7 +6,7 @@ import logo from "../logo.svg";
 import { getUserDetails } from "../services/apis";
 
 const Search = ({ setUserDetails }) => {
-  const [userId, setUserId] = useState("shiv");
+  const [userId, setUserId] = useState();
   const [fetchNew, setFetchNew] = useState(false);
   const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
