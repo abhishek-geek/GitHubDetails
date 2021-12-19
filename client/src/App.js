@@ -6,30 +6,54 @@ import Repos from "./components/Repos";
 import Search from "./components/Search";
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { getAvailableProfiles } from "./services/apis";
 
 function App() {
   const [userDetails, setUserDetails] = useState({});
+  const [availableProfiles, setAvailableProfiles] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(userDetails?.doc) {
-      navigate(`/${userDetails.doc.userId}`);
+  useEffect(() => {
+    (async () => {
+      const data = await getAvailableProfiles();
+      console.log(data);
+      setAvailableProfiles(data);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (userDetails.userId) {
+      console.log(userDetails);
+      navigate(`/${userDetails.userId}`);
     }
-  }, [userDetails])
+  }, [userDetails]);
 
   return (
     <Container>
       <Search setUserDetails={setUserDetails} />
       <Routes>
+
         <Route
           path="/:userId/repos"
-          element={<Repos repos={userDetails?.doc?.repos} />}
+          element={<Repos repos={userDetails?.repos} />}
         />
+        
         <Route
           path="/:userId"
-          element={<Profile userDetails={userDetails?.doc} />}
+          element={<Profile userDetails={userDetails} />}
         />
-        <Route path="/" element={<AvailableProfiles />} />
+
+        <Route
+          path="/"
+          element={
+            availableProfiles.length && (
+              <AvailableProfiles
+                setUserDetails={setUserDetails}
+                profiles={availableProfiles}
+              />
+            )
+          }
+        />
       </Routes>
     </Container>
   );

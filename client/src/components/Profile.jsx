@@ -5,7 +5,7 @@ import logo from "../logo.svg";
 import RepoModal from "./RepoModal";
 import { Link } from "react-router-dom";
 
-const Profile = ({ userDetails }) => {
+const Profile = ({ setUserDetails, userDetails }) => {
   // const [showModal, setShowModal] = useState(false);
   // const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const Profile = ({ userDetails }) => {
           <Card.Title>{userDetails?.name}</Card.Title>
           <Card.Text>{userDetails?.userId}</Card.Text>
           <Link to={`/${userDetails?.userId}/repos`}>
-            <Button variant="primary">Show Repos</Button>
+            <Button variant="primary" onClick={()=>setUserDetails(userDetails)}>Show Repos</Button>
           </Link>
         </Card.Body>
       </Card>
