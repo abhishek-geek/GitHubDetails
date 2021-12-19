@@ -23,6 +23,17 @@ const fetchDetails = async (req, res) => {
   }
 };
 
+const getAvailableProfiles = async (req, res) => {
+  try {
+    const docs = await GitHubStat.find({});
+    return res.status(200).json({ docs, error: false });
+  } catch (err) {
+    res.status(500);
+    res.json({ message: "Unable to fetch details", error: true });
+  }
+};
+
 module.exports = {
   fetchDetails,
+  getAvailableProfiles,
 };
