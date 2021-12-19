@@ -7,20 +7,20 @@ import Profile from "./Profile";
 import { getAvailableProfiles } from "../services/apis";
 
 const AvailableProfiles = ({ userId, name }) => {
-  const [profiles, setProfiles] = useState([]);
-  useEffect(() => {
-    console.log(2222);
-    let data;
-    (async () => {
-      data = await getAvailableProfiles();
-      console.log(data);
-      setProfiles(data);
-    })();
-  }, []);
+  const [profiles, setProfiles] = useState([1]);
+  // useEffect(() => {
+  //   console.log(2222);
+  //   let data;
+  //   (async () => {
+  //     data = await getAvailableProfiles();
+  //     console.log(data);
+  //     setProfiles(data);
+  //   })();
+  // }, []);
   return (
     <>
       {profiles.map((profile) => (
-        <Profile />
+        <Profile userDetails = {null}/>
       ))}
     </>
   );

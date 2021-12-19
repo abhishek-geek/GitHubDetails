@@ -1,17 +1,28 @@
 import React from "react";
+import { useState } from "react";
 import { Button, Row, Col, Card, Container } from "react-bootstrap";
 import logo from "../logo.svg";
+import RepoModal from "./RepoModal";
+import { Link } from "react-router-dom";
 
-const Profile = ({ userId, name }) => {
+const Profile = ({ userDetails }) => {
+  // const [showModal, setShowModal] = useState(false);
+  // const navigate = useNavigate();
+
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={logo} />
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>{userId}</Card.Text>
-        <Button variant="primary">Know More</Button>
-      </Card.Body>
-    </Card>
+    <>
+      {/* {showModal && userDetails?.repos.map(repo => <RepoModal repo={repo} />)} */}
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src={userDetails?.avatarUrl || logo} />
+        <Card.Body>
+          <Card.Title>{userDetails?.name}</Card.Title>
+          <Card.Text>{userDetails?.userId}</Card.Text>
+          <Link to={`/${userDetails?.userId}/repos`}>
+            <Button variant="primary">Show Repos</Button>
+          </Link>
+        </Card.Body>
+      </Card>
+    </>
   );
 };
 

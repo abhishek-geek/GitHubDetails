@@ -5,6 +5,7 @@ import logo from "../logo.svg";
 const Profile = ({ userDetails }) => {
   return (
     <Card style={{ width: "18rem" }}>
+      
     </Card>
   );
 };

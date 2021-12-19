@@ -1,22 +1,36 @@
 import "./App.css";
-import { Button, Row, Col, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import AvailableProfiles from "./components/AvailableProfile";
-import UserDetails from "./components/UserDetails";
+import Profile from "./components/Profile";
+import Repos from "./components/Repos";
 import Search from "./components/Search";
 import { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
-  const [userDetails, setUserDetails] = useState(null);
+  const [userDetails, setUserDetails] = useState({});
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("app user details", userDetails);
-  }, [userDetails]);
+  useEffect(()=>{
+    if(userDetails?.doc) {
+      navigate(`/${userDetails.doc.userId}`);
+    }
+  }, [userDetails])
 
   return (
     <Container>
       <Search setUserDetails={setUserDetails} />
-      {userDetails && <UserDetails userDetails={userDetails}/>}
-      <AvailableProfiles />
+      <Routes>
+        <Route
+          path="/:userId/repos"
+          element={<Repos repos={userDetails?.doc?.repos} />}
+        />
+        <Route
+          path="/:userId"
+          element={<Profile userDetails={userDetails?.doc} />}
+        />
+        <Route path="/" element={<AvailableProfiles />} />
+      </Routes>
     </Container>
   );
 }
